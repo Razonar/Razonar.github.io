@@ -1,0 +1,85 @@
+Example of ANOVA Analysis
+========================================================
+author: Alvaro
+date: August, 2014
+
+Looking at a data set of a collection of cars, we explore the relationship between a set of variables and miles per gallon (MPG) answering the following question: Is an automatic or manual transmission better for MPG.
+
+Getting Data
+========================================================
+
+```{r, echo=FALSE}
+library(datasets); data(mtcars);
+mtcars$cyl  <- factor(mtcars$cyl);   mtcars$vs   <- factor(mtcars$vs)
+mtcars$gear <- factor(mtcars$gear);  mtcars$carb <- factor(mtcars$carb)
+mtcars$am   <- factor(mtcars$am, labels=c("Automatic", "Manual"))
+```
+
+```{r, echo=TRUE}
+summary(cars)
+aggregate(mpg ~ am, data = mtcars, mean)
+```
+
+Exloratory Data Analysis
+========================================================
+
+```{r, echo=FALSE}
+library(sm);
+par(mfrow=c(2, 2))
+plot(cars)
+sm.density.compare(mtcars$mpg, mtcars$am, xlab = "MPG")
+boxplot(mpg ~ am, data = mtcars, ylab = "MPG")
+boxplot(mpg ~ am, data = mtcars, xlab = "Transmission Type", ylab = "MPG", main = "Boxplot")
+```
+
+Modelling
+========================================================
+
+- Linear fit model
+
+```{r, echo=TRUE}
+inimodel <- lm(mpg ~ am, data = mtcars)
+```
+- Best Model
+
+```{r, echo=TRUE}
+bestmodel <- lm(mpg ~ am, data = mtcars)
+```
+- Base Model
+
+```{r, echo=TRUE}
+basemodel <- lm(mpg ~ am, data = mtcars);
+```
+
+Results
+========================================================
+
+ANOVA analysis
+```{r, echo=TRUE}
+MODEL <- bestmodel
+anova(inimodel, MODEL)
+```
+Influential and high leverage outlying points.
+```{r, echo=TRUE}
+InfP <- dfbetas(MODEL);   tail(sort(InfP[, "amManual"]), 3)
+LevP <- hatvalues(MODEL); tail(sort(LevP), 3)
+```
+
+***
+
+```{r, echo=FALSE}
+par(mfrow=c(3, 2))
+plot(bestmodel)
+plot(mtcars$qsec,
+     resid(bestmodel),
+     ylab="Residuals",
+     xlab="1/4 Mile Time",
+     main="MPG")
+abline(0,0)
+plot(mtcars$wt,
+     resid(bestmodel),
+     ylab="Residuals",
+     xlab="Weight",
+     main="MPG")
+abline(0,0)
+```
