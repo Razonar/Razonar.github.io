@@ -10,41 +10,41 @@ echo " Personal CV                  "
 echo "------------------------------"
 echo 
 
-    git init
+   git init
 
-    git config --global user.name "Razonar"
-    git config --global user.email "razonar@outlook.com"
-    git config --global github.token ###### TOKEN_HERE #####
+   git config --global user.name "Razonar"
+   git config --global user.email "razonar@outlook.com"
+   git config --global github.token ###### TOKEN_HERE #####
 
-    git init
+   git init
 
    git config credential.helper 'cache --timeout=3600'
 
 
 if test "$@" = 'i' ; then
 
-    echo
-    echo "As Input: add origin & pull"
-    echo "------------------------------"
+   echo
+   echo "As Input: add origin & pull"
+   echo "------------------------------"
 
-    git clone https://github.com/Razonar/Razonar.github.io
+   git clone https://github.com/Razonar/Razonar.github.io
 
 fi
 
 if test "$@" = 'o' ; then
 
-    echo
-	echo "As output: add, commit, push"
-    echo "------------------------------"
+   echo
+   echo "As output: add, commit, push"
+   echo "------------------------------"
 
-    cd Razonar.github.io
+   cd Razonar.github.io
 
-    git init
+   git init
 
-	git add .
-	git add -u
-	git commit -m "Go up"
-    git push -u origin master
+   git add .
+   git add -u
+   git commit -m "Go up"
+   git push -u origin master
 
 fi
 
