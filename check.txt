@@ -4,3 +4,11 @@ Check A
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <meta name=Generator content="Microsoft Word 15 (filtered)">
 <style>
+
+O este otro:
+
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Alvaro Diaz Falconi - CV</title>
+<meta name=Generator content="Microsoft Word 15 (filtered)">
